@@ -1,6 +1,1 @@
-*
-!/*.js
-!/.gitignore
-!/README.md
-!/LICENSE
-*main.js
+.env
