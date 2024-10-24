@@ -8,6 +8,23 @@ function nest() {
 	sudo npm install -g @nestjs/cli
 }
 
+function postgres() {
+	sudo apt-get install -y postgresql postgresql-contrib
+}
+
+function create_db() {
+	./aidluminate-backend/setup_postgres.sh
+}
+
+function dependencies() {
+	# check if node modules are installed
+	if [ ! -d "aidluminate-backend/node_modules" ]
+	then
+		npm install --prefix aidluminate-backend
+	fi
+}
+
+
 function install() {
 	# check if node is installed
 	if ! command -v node &> /dev/null
@@ -22,5 +39,7 @@ function install() {
 	fi
 
 	# install dependencies
-	npm install
+	dependencies
 }
+
+install
