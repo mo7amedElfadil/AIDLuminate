@@ -4,6 +4,6 @@ import { SmeController } from './sme.controller';
 
 @Module({
   providers: [SmeService],
-  controllers: [SmeController]
+  controllers: [SmeController],
 })
 export class SmeModule {}
