@@ -1,15 +1,29 @@
 name: Linter
-run-name: $ {{ github.actor }} / $ {{ github.workflow }} / $ {{ github.run_number }}
+run-name: ${{ github.actor }} / ${{ github.workflow }} / ${{ github.run_number }}
 on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: latest
+
       - name: Install dependencies
         run: npm ci
+
       - name: run Linter
-        run: npm run lint
+        run: npm run linta
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-  
+
