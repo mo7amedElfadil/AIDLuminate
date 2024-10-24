@@ -7,13 +7,13 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "npm run build --prefix aidluminate-backend",
 		"start:backend": "npm run start --prefix aidluminate-backend",
+		"lint": "npm run lint --prefix aidluminate-backend",
 		"prepare": "husky"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"lint": "eslint '**/*.ts'",
 		"@commitlint/cli": "^19.5.0",
 		"@commitlint/config-conventional": "^19.5.0",
 		"commitizen": "^4.3.1",

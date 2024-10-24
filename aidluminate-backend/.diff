@@ -1,0 +1,80 @@
+diff --git a/.husky/commit-msg b/.husky/commit-msg
+index da99483..18f6ef6 100644
+--- a/.husky/commit-msg
++++ b/.husky/commit-msg
+@@ -1 +1,2 @@
++#!/bin/sh
+ npx --no -- commitlint --edit "$1"
+diff --git a/.husky/pre-commit b/.husky/pre-commit
+index 6e80e9e..77dd211 100644
+--- a/.husky/pre-commit
++++ b/.husky/pre-commit
+@@ -1 +1,2 @@
+-cd aidluminate-backend && npm run lint
++#!/bin/sh
++npm run lint
+diff --git a/.husky/prepare-commit-msg b/.husky/prepare-commit-msg
+index 5d69d0a..1be8b5e 100644
+--- a/.husky/prepare-commit-msg
++++ b/.husky/prepare-commit-msg
+@@ -1 +1,2 @@
++#!/bin/sh
+ exec < /dev/tty && npx cz --hook || true
+diff --git a/aidluminate-backend/package.json b/aidluminate-backend/package.json
+index 8ab2f1d..6c317b3 100644
+--- a/aidluminate-backend/package.json
++++ b/aidluminate-backend/package.json
+@@ -5,14 +5,18 @@
+   "author": "",
+   "private": true,
+   "license": "UNLICENSED",
++  "type": "module",
+   "scripts": {
+     "build": "nest build",
++    "lint": "eslint \"src/**/*.ts\" --ignore-pattern node_modules/ --ignore-pattern dist/ --fix",
++	"prettier": "./node_modules/.bin/prettier --check \"**/*.{js,json,ts,yml,yaml}\"",
++	"prettier:write": "./node_modules/.bin/prettier --write \"**/*.{js,json,ts,yml,yaml}\"",
+     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
++	"lint:fix-quiet": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix --quiet",
+     "start": "nest start",
+     "start:dev": "nest start --watch",
+     "start:debug": "nest start --debug --watch",
+     "start:prod": "node dist/main",
+-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+     "test": "jest",
+     "test:watch": "jest --watch",
+     "test:cov": "jest --coverage",
+diff --git a/aidluminate-backend/tsconfig.json b/aidluminate-backend/tsconfig.json
+index 95f5641..c620f51 100644
+--- a/aidluminate-backend/tsconfig.json
++++ b/aidluminate-backend/tsconfig.json
+@@ -16,6 +16,9 @@
+     "noImplicitAny": false,
+     "strictBindCallApply": false,
+     "forceConsistentCasingInFileNames": false,
+-    "noFallthroughCasesInSwitch": false
++    "noFallthroughCasesInSwitch": false,
++	"paths": {
++		"@sme/*": ["src/sme/*"],
++		"@service-provider/*": ["src/service-provider/*"]
+   }
+ }
+diff --git a/package.json b/package.json
+index bf8d9e0..67b5035 100644
+--- a/package.json
++++ b/package.json
+@@ -7,13 +7,13 @@
+ 		"test": "echo \"Error: no test specified\" && exit 1",
+ 		"build": "npm run build --prefix aidluminate-backend",
+ 		"start:backend": "npm run start --prefix aidluminate-backend",
++		"lint": "npm run lint --prefix aidluminate-backend",
+ 		"prepare": "husky"
+ 	},
+ 	"keywords": [],
+ 	"author": "",
+ 	"license": "ISC",
+ 	"devDependencies": {
+-		"lint": "eslint '**/*.ts'",
+ 		"@commitlint/cli": "^19.5.0",
+ 		"@commitlint/config-conventional": "^19.5.0",
+ 		"commitizen": "^4.3.1",
