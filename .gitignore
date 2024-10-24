@@ -1,1 +1,30 @@
+# Logs
+**/package-lock.json
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*_log.txt
+**/package-lock.json
+node_modules
+dist
+dist-ssr
+*.local
+*.txt
 .env
+
+*migration*
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.pre-commit-config.yaml
