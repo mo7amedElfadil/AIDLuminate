@@ -1,0 +1,1 @@
+cd aidluminate-backend && npm run lint
